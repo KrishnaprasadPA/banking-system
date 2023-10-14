@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbanking.proto\x12\x07\x62\x61nking\"\xaf\x01\n\rCustomerEvent\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x34\n\nevent_type\x18\x02 \x01(\x0e\x32 .banking.CustomerEvent.EventType\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x05\x12\x10\n\x08\x65vent_id\x18\x04 \x01(\x05\"1\n\tEventType\x12\t\n\x05QUERY\x10\x00\x12\x0b\n\x07\x44\x45POSIT\x10\x01\x12\x0c\n\x08WITHDRAW\x10\x02\"\xb2\x01\n\x0b\x42ranchEvent\x12\x11\n\tbranch_id\x18\x01 \x01(\t\x12\x32\n\nevent_type\x18\x02 \x01(\x0e\x32\x1e.banking.BranchEvent.EventType\x12\x0e\n\x06\x61mount\x18\x03 \x01(\x05\x12\x10\n\x08\x65vent_id\x18\x04 \x01(\x05\":\n\tEventType\x12\x15\n\x11PROPAGATE_DEPOSIT\x10\x00\x12\x16\n\x12PROPAGATE_WITHDRAW\x10\x01\"E\n\x0f\x43ustomerProcess\x12\n\n\x02id\x18\x01 \x01(\t\x12&\n\x06\x65vents\x18\x02 \x03(\x0b\x32\x16.banking.CustomerEvent\"4\n\rBranchProcess\x12\n\n\x02id\x18\x01 \x01(\t\x12\x17\n\x0finitial_balance\x18\x02 \x01(\x05\x32\xa0\x01\n\x0e\x42\x61nkingService\x12I\n\x15ProcessCustomerEvents\x12\x18.banking.CustomerProcess\x1a\x16.banking.CustomerEvent\x12\x43\n\x13ProcessBranchEvents\x12\x16.banking.BranchProcess\x1a\x14.banking.BranchEventb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbanking.proto\"#\n\x0cQueryRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\"4\n\x0e\x44\x65positRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05money\x18\x02 \x01(\x02\"5\n\x0fWithdrawRequest\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\r\n\x05money\x18\x02 \x01(\x02\"@\n\x0f\x42\x61nkingResponse\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x18\n\x10response_message\x18\x02 \x01(\t\"@\n\rCustomerEvent\x12\x11\n\tinterface\x18\x01 \x01(\t\x12\x12\n\x05money\x18\x02 \x01(\x02H\x00\x88\x01\x01\x42\x08\n\x06_money2\x88\x02\n\x0e\x42\x61nkingService\x12(\n\x05Query\x12\r.QueryRequest\x1a\x10.BankingResponse\x12,\n\x07\x44\x65posit\x12\x0f.DepositRequest\x1a\x10.BankingResponse\x12.\n\x08Withdraw\x12\x10.WithdrawRequest\x1a\x10.BankingResponse\x12\x35\n\x10PropagateDeposit\x12\x0f.DepositRequest\x1a\x10.BankingResponse\x12\x37\n\x11PropagateWithdraw\x12\x10.WithdrawRequest\x1a\x10.BankingResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,18 +21,16 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'banking_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_CUSTOMEREVENT']._serialized_start=27
-  _globals['_CUSTOMEREVENT']._serialized_end=202
-  _globals['_CUSTOMEREVENT_EVENTTYPE']._serialized_start=153
-  _globals['_CUSTOMEREVENT_EVENTTYPE']._serialized_end=202
-  _globals['_BRANCHEVENT']._serialized_start=205
-  _globals['_BRANCHEVENT']._serialized_end=383
-  _globals['_BRANCHEVENT_EVENTTYPE']._serialized_start=325
-  _globals['_BRANCHEVENT_EVENTTYPE']._serialized_end=383
-  _globals['_CUSTOMERPROCESS']._serialized_start=385
-  _globals['_CUSTOMERPROCESS']._serialized_end=454
-  _globals['_BRANCHPROCESS']._serialized_start=456
-  _globals['_BRANCHPROCESS']._serialized_end=508
-  _globals['_BANKINGSERVICE']._serialized_start=511
-  _globals['_BANKINGSERVICE']._serialized_end=671
+  _globals['_QUERYREQUEST']._serialized_start=17
+  _globals['_QUERYREQUEST']._serialized_end=52
+  _globals['_DEPOSITREQUEST']._serialized_start=54
+  _globals['_DEPOSITREQUEST']._serialized_end=106
+  _globals['_WITHDRAWREQUEST']._serialized_start=108
+  _globals['_WITHDRAWREQUEST']._serialized_end=161
+  _globals['_BANKINGRESPONSE']._serialized_start=163
+  _globals['_BANKINGRESPONSE']._serialized_end=227
+  _globals['_CUSTOMEREVENT']._serialized_start=229
+  _globals['_CUSTOMEREVENT']._serialized_end=293
+  _globals['_BANKINGSERVICE']._serialized_start=296
+  _globals['_BANKINGSERVICE']._serialized_end=560
 # @@protoc_insertion_point(module_scope)

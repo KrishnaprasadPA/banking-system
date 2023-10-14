@@ -1,48 +1,34 @@
 import grpc
+import time
 import banking_pb2
 import banking_pb2_grpc
-import time
 
 class Customer:
     def __init__(self, customer_id, events):
         self.customer_id = customer_id
         self.events = events
-        self.stub = None
         self.recvMsg = []
+        self.stub = None
 
-    def createStub(self):
-        # Initialize gRPC stub
-        channel = grpc.insecure_channel('localhost:50051')  # Adjust the address and port
+    def createStub(self, branch_address):
+        channel = grpc.insecure_channel(branch_address)
         self.stub = banking_pb2_grpc.BankingServiceStub(channel)
 
     def executeEvents(self):
+        for event in self.events
         for event in self.events:
-            if event['interface'] == 'query':
-                query_event = banking_pb2.CustomerEvent(
-                    customer_id=str(self.customer_id),
-                    event_type=banking_pb2.CustomerEvent.EventType.QUERY,
-                    amount=0,  # For query, amount can be 0
-                    event_id=event['id']
-                )
-                response = self.stub.ProcessCustomerEvents(query_event)
-                self.recvMsg.append(response)
+            if event.interface == 'QUERY':
+                response = self.stub.Query(banking_pb2.QueryRequest(customer_id=self.customer_id))
+                self.recvMsg.append((event, response))
+            elif event.interface == 'DEPOSIT':
+                response = self.stub.Deposit(banking_pb2.DepositRequest(customer_id=self.customer_id, amount=event.amount))
+                self.recvMsg.append((event, response))
+            elif event.interface == 'WITHDRAW':
+                response = self.stub.Withdraw(banking_pb2.WithdrawRequest(customer_id=self.customer_id, amount=event.amount))
+                self.recvMsg.append((event, response))
+            else:
+                print(f"Unknown event type: {event.interface}")
 
-            elif event['interface'] == 'deposit':
-                deposit_event = banking_pb2.CustomerEvent(
-                    customer_id=str(self.customer_id),
-                    event_type=banking_pb2.CustomerEvent.EventType.DEPOSIT,
-                    amount=event['money'],
-                    event_id=event['id']
-                )
-                response = self.stub.ProcessCustomerEvents(deposit_event)
-                self.recvMsg.append(response)
-
-            elif event['interface'] == 'withdraw':
-                withdraw_event = banking_pb2.CustomerEvent(
-                    customer_id=str(self.customer_id),
-                    event_type=banking_pb2.CustomerEvent.EventType.WITHDRAW,
-                    amount=event['money'],
-                    event_id=event['id']
-                )
-                response = self.stub.ProcessCustomerEvents(withdraw_event)
-                self.recvMsg.append(response)
+        # Print received messages
+        for event, response in self.recvMsg:
+            print(f"Event: {event.interface}, Amount: {event.amount}, Response: {response.success}")
