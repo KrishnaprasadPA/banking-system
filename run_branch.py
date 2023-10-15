@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 
 def start_branch_server(branch_id, initial_balance, branches):
+    # Start multiple branch servers
     server = grpc.server(ThreadPoolExecutor(max_workers=10))
     branch1 = branch.Branch(branch_id, initial_balance, branches)
     banking_pb2_grpc.add_BankingServiceServicer_to_server(branch1, server)
@@ -40,6 +41,3 @@ if __name__ == '__main__':
     # Wait for all branch processes to complete
     for p in branch_processes:
         p.join()
-
-    # Exiting the program
-    print("All branch processes completed. Exiting the program.")

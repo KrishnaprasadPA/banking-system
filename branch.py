@@ -8,6 +8,7 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
         self.balance = balance
         self.branches = branches
 
+# function to accept requests from customers
     def MsgDelivery(self, request, context):
         if request.interface == "QUERY":
             return self.Query(request,context)
@@ -18,10 +19,11 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
         else:
             return
 
-
+# returns balance
     def Query(self, request, context):
         return banking_pb2.BankingResponse(customer_id=request.id, response_message=f"balance: {self.balance}")
 
+# performs withdraw operation if possible and returns success or failure message after propagating withdraw
     def Withdraw(self, request, context):
         money = request.money
         if self.balance >= money:
@@ -31,6 +33,7 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
         else:
             return banking_pb2.BankingResponse(customer_id=request.id, response_message="failure")
 
+    # performs deposit operation and returns success message after propagating deposit
     def Deposit(self, request, context):
         self.balance += request.money
         self.propagate_to_branches(branch_id=self.branch_id, money=request.money)
@@ -44,6 +47,7 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
         self.balance -= request.money
         return banking_pb2.BankingResponse(customer_id=request.id, response_message="Withdraw propagated successfully.")
 
+# propagate deposit or withdraw to all branches other than the source branch
     def propagate_to_branches(self, branch_id, money):
         for target_branch_id in self.branches:
             if target_branch_id != branch_id:

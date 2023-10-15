@@ -21,6 +21,7 @@ input_file = sys.argv[1]
 with open(input_file) as f:
     data = json.load(f)
 output = []
+# group events of customer by id, process them and append results to output
 for item in data:
     if item["type"] == "customer":
         id = item["id"]
@@ -41,6 +42,6 @@ for item in data:
 
 # Write the output to a JSON file
 with open('output.json', 'w') as outfile:
-    json.dump(output, outfile, indent=4)
+    json.dump(output, outfile, indent=2)
 
-print("Output written to 'output.json'.")
+print("Output written to 'output.json'")

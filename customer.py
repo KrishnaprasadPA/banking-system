@@ -10,11 +10,12 @@ class Customer:
         self.stub = None
 
     def createStub(self, branch_address):
+        # Create customer stub and connect to respective branch server
         channel = grpc.insecure_channel(f'localhost:{50050+branch_address}')
         self.stub = banking_pb2_grpc.BankingServiceStub(channel)
 
     def executeEvents(self):
-            # for event in self.events
+        # send events to server, accept responses and append them to return to run_customer.py
             responses = []
             for event in self.events:
                 result = self.stub.MsgDelivery(banking_pb2.BankingRequest(id=self.id, interface=event.interface, money= event.money))
