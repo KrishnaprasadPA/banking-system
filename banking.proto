@@ -1,39 +1,28 @@
 syntax = "proto3";
 
 service BankingService {
-  rpc Query (QueryRequest) returns (BankingResponse);
-  rpc Deposit (DepositRequest) returns (BankingResponse);
-  rpc Withdraw (WithdrawRequest) returns (BankingResponse);
-  rpc PropagateDeposit (DepositRequest) returns (BankingResponse);
-  rpc PropagateWithdraw (WithdrawRequest) returns (BankingResponse);
+  rpc MsgDelivery(BankingRequest) returns (BankingResponse);
+  rpc Propagate_Deposit (PropagateRequest) returns (BankingResponse);
+  rpc Propagate_Withdraw (PropagateRequest) returns (BankingResponse);
 }
 
-message QueryRequest {
-  string customer_id = 1;
+message BankingRequest {
+  string id = 1;
+  string interface = 2;
+  int32 money = 3;
 }
 
-message DepositRequest {
-  string customer_id = 1;
-  float money = 2;
-}
-
-message WithdrawRequest {
-  string customer_id = 1;
-  float money = 2;
+message PropagateRequest {
+  string id = 1;
+  int32 money = 2;
 }
 
 message BankingResponse {
   string customer_id = 1;
-  string response_message = 2;
+  string response_message = 3;
 }
 
 message CustomerEvent {
-//  enum EventType {
-//    QUERY = 0;
-//    DEPOSIT = 1;
-//    WITHDRAW = 2;
-//  }
-
   string interface = 1;
-  optional float money = 2;
+  int32 money = 2;
 }
