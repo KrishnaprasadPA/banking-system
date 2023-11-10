@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbanking.proto\">\n\x0e\x42\x61nkingRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tinterface\x18\x02 \x01(\t\x12\r\n\x05money\x18\x03 \x01(\x05\"-\n\x10PropagateRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05money\x18\x02 \x01(\x05\"@\n\x0f\x42\x61nkingResponse\x12\x13\n\x0b\x63ustomer_id\x18\x01 \x01(\t\x12\x18\n\x10response_message\x18\x03 \x01(\t\"1\n\rCustomerEvent\x12\x11\n\tinterface\x18\x01 \x01(\t\x12\r\n\x05money\x18\x02 \x01(\x05\x32\xb7\x01\n\x0e\x42\x61nkingService\x12\x30\n\x0bMsgDelivery\x12\x0f.BankingRequest\x1a\x10.BankingResponse\x12\x38\n\x11Propagate_Deposit\x12\x11.PropagateRequest\x1a\x10.BankingResponse\x12\x39\n\x12Propagate_Withdraw\x12\x11.PropagateRequest\x1a\x10.BankingResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbanking.proto\"j\n\x0e\x42\x61nkingRequest\x12\x1b\n\x13\x63ustomer_request_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x11\n\tinterface\x18\x03 \x01(\t\x12\r\n\x05money\x18\x04 \x01(\x05\x12\r\n\x05\x63lock\x18\x05 \x01(\x05\"Y\n\x10PropagateRequest\x12\x1b\n\x13\x63ustomer_request_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\r\n\x05money\x18\x03 \x01(\x05\x12\r\n\x05\x63lock\x18\x04 \x01(\x05\"l\n\x0f\x42\x61nkingResponse\x12\x1b\n\x13\x63ustomer_request_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63ustomer_id\x18\x02 \x01(\t\x12\x18\n\x10response_message\x18\x03 \x01(\t\x12\r\n\x05\x63lock\x18\x04 \x01(\x05\"]\n\rCustomerEvent\x12\x1b\n\x13\x63ustomer_request_id\x18\x01 \x01(\t\x12\x11\n\tinterface\x18\x02 \x01(\t\x12\r\n\x05money\x18\x03 \x01(\x05\x12\r\n\x05\x63lock\x18\x04 \x01(\x05\x32\xb7\x01\n\x0e\x42\x61nkingService\x12\x30\n\x0bMsgDelivery\x12\x0f.BankingRequest\x1a\x10.BankingResponse\x12\x38\n\x11Propagate_Deposit\x12\x11.PropagateRequest\x1a\x10.BankingResponse\x12\x39\n\x12Propagate_Withdraw\x12\x11.PropagateRequest\x1a\x10.BankingResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,13 +22,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _globals['_BANKINGREQUEST']._serialized_start=17
-  _globals['_BANKINGREQUEST']._serialized_end=79
-  _globals['_PROPAGATEREQUEST']._serialized_start=81
-  _globals['_PROPAGATEREQUEST']._serialized_end=126
-  _globals['_BANKINGRESPONSE']._serialized_start=128
-  _globals['_BANKINGRESPONSE']._serialized_end=192
-  _globals['_CUSTOMEREVENT']._serialized_start=194
-  _globals['_CUSTOMEREVENT']._serialized_end=243
-  _globals['_BANKINGSERVICE']._serialized_start=246
-  _globals['_BANKINGSERVICE']._serialized_end=429
+  _globals['_BANKINGREQUEST']._serialized_end=123
+  _globals['_PROPAGATEREQUEST']._serialized_start=125
+  _globals['_PROPAGATEREQUEST']._serialized_end=214
+  _globals['_BANKINGRESPONSE']._serialized_start=216
+  _globals['_BANKINGRESPONSE']._serialized_end=324
+  _globals['_CUSTOMEREVENT']._serialized_start=326
+  _globals['_CUSTOMEREVENT']._serialized_end=419
+  _globals['_BANKINGSERVICE']._serialized_start=422
+  _globals['_BANKINGSERVICE']._serialized_end=605
 # @@protoc_insertion_point(module_scope)

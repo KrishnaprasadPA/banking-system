@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "type": "branch",
+  "events": [
+    {
+      "customer-request-id": "1",
+      "logical_clock": 2,
+      "interface": "deposit",
+      "comment": "event_recv from customer 1"
+    },
+    {
+      "customer-request-id": "",
+      "logical_clock": 3,
+      "interface": "propagate_deposit",
+      "comment": "event_recv from branch 9"
+    }
+  ]
+}

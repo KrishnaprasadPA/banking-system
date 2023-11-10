@@ -2,11 +2,16 @@
 
 Execution steps:
 
+Note: The program uses temporary files to write and combine results which are finally stored in the final 3 output files. If errors are seen please provide necessary permissions
+
 1. Form a valid input file say ```input.json```
 2. Execute run_branch with command : ```python3 run_branch.py input.json```
 3. Execute run_customer with command : ```python3 run_customer.py input.json```
-3. Outputs will be stored to ```output.json``` file
-4. Terminate all servers
+3. Outputs will be stored to 3 output files
+4. ````output_1.json```` will have part 1 output
+5. ````output_2.json```` will have part 2 output
+6. ````output_3.json```` will have part 3 output
+7. Terminate all servers
 
 
 
