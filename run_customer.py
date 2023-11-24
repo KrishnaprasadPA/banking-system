@@ -6,11 +6,8 @@ import customer
 
 # Function to process events for a customer
 def process_customer_events(id, events):
-    responses = []
     currentCustomer=customer.Customer(str(id), events)
-    # currentCustomer.createStub(id)
     return currentCustomer.executeEvents()
-    # return {'id': id, 'recv': responses}
 
 
 # Read the input file and process events for each customer
@@ -34,12 +31,10 @@ for item in data:
             event = banking_pb2.CustomerEvent(interface=interface, money=money, branch=branch)
             events.append(event)
         print(f"\nProcessing events for Customer {id}:")
-        response = process_customer_events(id, events)
-
-        # output.append(response)
+        output.extend(process_customer_events(id, events))
 
 # Write the output to a JSON file
 with open('output.json', 'w') as outfile:
-    json.dump(response, outfile, indent=2)
+    json.dump(output, outfile, indent=2)
 
 print("Output written to 'output.json'")
