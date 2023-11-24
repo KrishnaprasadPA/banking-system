@@ -25,4 +25,5 @@ message BankingResponse {
 message CustomerEvent {
   string interface = 1;
   int32 money = 2;
+  int32 branch = 3;
 }

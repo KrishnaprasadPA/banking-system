@@ -21,7 +21,7 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
 
 # returns balance
     def Query(self, request, context):
-        return banking_pb2.BankingResponse(customer_id=request.id, response_message=f"balance: {self.balance}")
+        return banking_pb2.BankingResponse(customer_id=request.id, response_message=str(self.balance))
 
 # performs withdraw operation if possible and returns success or failure message after propagating withdraw
     def Withdraw(self, request, context):
