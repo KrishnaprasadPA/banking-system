@@ -1,4 +1,5 @@
 import grpc
+import time
 import banking_pb2
 import banking_pb2_grpc
 
@@ -7,6 +8,7 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
         self.branch_id = branch_id
         self.balance = balance
         self.branches = branches
+        self.flag = 0
 
 # function to accept requests from customers
     def MsgDelivery(self, request, context):
@@ -21,10 +23,14 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
 
 # returns balance
     def Query(self, request, context):
+        while self.flag == 1:
+            time.sleep(5)
         return banking_pb2.BankingResponse(customer_id=request.id, response_message=str(self.balance))
 
 # performs withdraw operation if possible and returns success or failure message after propagating withdraw
     def Withdraw(self, request, context):
+        while self.flag == 1:
+            time.sleep(5)
         money = request.money
         if self.balance >= money:
             self.balance -= money
@@ -35,16 +41,22 @@ class Branch(banking_pb2_grpc.BankingServiceServicer):
 
     # performs deposit operation and returns success message after propagating deposit
     def Deposit(self, request, context):
+        while self.flag == 1:
+            time.sleep(5)
         self.balance += request.money
         self.propagate_to_branches(branch_id=self.branch_id, money=request.money)
         return banking_pb2.BankingResponse(customer_id=request.id,  response_message="success")
 
     def Propagate_Deposit(self, request, context):
+        self.flag = 1
         self.balance += request.money
+        self.flag = 0
         return banking_pb2.BankingResponse(customer_id=request.id, response_message="Deposit propagated successfully.")
 
     def Propagate_Withdraw(self, request, context):
+        self.flag = 1
         self.balance -= request.money
+        self.flag = 0
         return banking_pb2.BankingResponse(customer_id=request.id, response_message="Withdraw propagated successfully.")
 
 # propagate deposit or withdraw to all branches other than the source branch
